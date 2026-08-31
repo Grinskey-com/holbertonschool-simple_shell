@@ -11,6 +11,9 @@
  *
  * Return: Always 0 (Success).
  */
+
+extern char **environ;
+
 int main(int ac, char **av)
 {
 	char *line = NULL;
@@ -63,13 +66,15 @@ int main(int ac, char **av)
 		}
 		if (pid == 0)
 		{	
-			printf("I'm the child, my pid is %d\n", getpid());
-			free(line);
-			exit(0);
+			char *argv[2] = {line, NULL};
+			execve(line, argv, environ);
+				
+				perror(av[0]);
+				free(line);
+				_exit(127);
 		}
 		else 
 		{
-			printf("I'm the parent, my child's pid is %d\n", pid);
 			wait(&status);
 		}	
 	}
