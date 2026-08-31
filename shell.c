@@ -61,13 +61,13 @@ int main(int ac, char **av)
 			free(line);
 			continue;
 		}
-		if (pid == 0)//add execve
+		if (pid == 0)
 		{	
 			printf("I'm the child, my pid is %d\n", getpid());
 			free(line);
 			exit(0);
 		}
-		else // add waitpid
+		else 
 		{
 			printf("I'm the parent, my child's pid is %d\n", pid);
 			wait(&status);
