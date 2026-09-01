@@ -17,4 +17,8 @@ void strip_line(char *line);
 /* execute.c */
 void execute_command(char *line, char *av0);
 
+/* token.c */
+int cmd_count(char *line, char *delimiter);
+char **cmd_tokens(char *line, char *delimiter)
+
 #endif /* SHELL_H */

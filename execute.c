@@ -9,7 +9,10 @@ void execute_command(char *line, char *av0)
 {
 	pid_t pid;
 	int status;
-	char *argv[2];
+	char **argv;
+	
+	/* split the line into an array of argument tokens */
+	argv = cmd_tokens(line, " \t");
 
 	fflush(stdout);
 	pid = fork();
@@ -20,8 +23,6 @@ void execute_command(char *line, char *av0)
 	}
 	if (pid == 0)
 	{
-		argv[0] = line;
-		argv[1] = NULL;
 		execve(line, argv, environ);
 		perror(av0);
 		_exit(127);
@@ -29,5 +30,6 @@ void execute_command(char *line, char *av0)
 	else
 	{
 		wait(&status);
+		free(argv);
 	}
 }
