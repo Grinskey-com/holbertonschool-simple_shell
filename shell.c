@@ -57,7 +57,6 @@ int main(int ac, char **av)
 		/* fork time*/
 		fflush(stdout);
 		pid = fork();
-		
 		if (pid == -1)
 		{
 			perror("fork failed");
@@ -65,20 +64,21 @@ int main(int ac, char **av)
 			continue;
 		}
 		if (pid == 0)
-		{	
-			char *argv[2] = {line, NULL};
+		{
+			char *argv[2];
+
+			argv[0] = line;
+			argv[1] = NULL;
+
 			execve(line, argv, environ);
-				
-				perror(av[0]);
-				free(line);
-				_exit(127);
+			perror(av[0]);
+			free(line);
+			_exit(127);
 		}
-		else 
+		else
 		{
 			wait(&status);
-		}	
+		}
 	}
-
 	return (0);
 }
-
