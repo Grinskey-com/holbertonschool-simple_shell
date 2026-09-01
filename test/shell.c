@@ -46,10 +46,11 @@ int main(int ac, char **av)
 		}
 		cmd_len = strlen(line);
 
-		/* strip trailing newline */
-		if (cmd_len > 0 && line[cmd_len - 1] == '\n')
+		/* strip trailing newline, tab and whitespace */
+		while (cmd_len > 0 && (line[cmd_len - 1] == '\n' || line[cmd_len - 1] == ' ' || line[cmd_len - 1] == '\t'))
 		{
 			line[cmd_len - 1] = '\0';
+			cmd_len--;
 		}
 		if (line[0] == '\0')
 			continue;
@@ -64,7 +65,7 @@ int main(int ac, char **av)
 			continue;
 		}
 		if (pid == 0)
-		{
+	{
 			char *argv[2];
 
 			argv[0] = line;

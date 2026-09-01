@@ -12,9 +12,9 @@ extern char **environ;
 
 /* input.c */
 char *read_line(void);
-void strip_newline(char *line);
+void strip_line(char *line);
 
 /* execute.c */
-void execute_line(char *line, char *prog_name);
+void execute_command(char *line, char *av0);
 
 #endif /* SHELL_H */
