@@ -23,6 +23,8 @@ char **cmd_tokens(char *line, char *delimiter);
 
 /* builtins.c */
 void print_env(void);
+/* find_path.c */
+char *find_path(char *cmd);
 
 
 #endif /* SHELL_H */
