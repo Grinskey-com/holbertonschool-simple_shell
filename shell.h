@@ -21,6 +21,8 @@ void execute_command(char *line, char *av0);
 int cmd_count(char *line, char *delimiter);
 char **cmd_tokens(char *line, char *delimiter);
 
+/* builtins.c */
+void print_env(void);
 /* find_path.c */
 char *find_path(char *cmd);
 

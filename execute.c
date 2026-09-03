@@ -29,6 +29,14 @@ void execute_command(char *line, char *av0)
 		return;
 	}
 
+	/* if argv[0] is 'env', skip the rest of the function */
+	if (strcmp(argv[0], "env") == 0)
+	{
+		print_env();
+		free(argv);
+		return;
+	}
+
 	fflush(stdout);
 	pid = fork();
 	if (pid == -1)
