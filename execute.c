@@ -29,6 +29,14 @@ void execute_command(char *line, char *av0)
 		return;
 	}
 
+	/* if argv[0] is 'exit', exit shell */
+	if (strcmp(argv[0], "exit") == 0)
+	{
+		free(argv);
+		free(line);
+		exit(EXIT_SUCCESS);
+	}
+
 	/* if argv[0] is 'env', skip the rest of the function */
 	if (strcmp(argv[0], "env") == 0)
 	{
