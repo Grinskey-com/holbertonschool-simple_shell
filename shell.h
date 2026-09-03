@@ -23,6 +23,8 @@ char **cmd_tokens(char *line, char *delimiter);
 
 /* builtins.c */
 void print_env(void);
+char *_getenv(const char *name);
+
 /* find_path.c */
 char *find_path(char *cmd);
 

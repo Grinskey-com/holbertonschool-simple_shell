@@ -30,7 +30,7 @@ char *find_path(char *cmd)
 	}
 
 	/* get path from get env */
-	path_env = getenv("PATH");
+	path_env = _getenv("PATH");
 	if (path_env == NULL || path_env[0] == '\0')
 		return (NULL);
 
