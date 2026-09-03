@@ -26,13 +26,10 @@ int main(int ac, char **av)
 		}
 
 		strip_line(line);
-		if (line[0] == '\0')
-		{
-			free(line);
-			continue;
-		}
 
-		execute_command(line, av[0]);
+		if (line[0] != '\0')
+			execute_command(line, av[0]);
+		
 		free(line);
 	}
 
