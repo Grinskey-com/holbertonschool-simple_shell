@@ -19,6 +19,10 @@ void execute_command(char *line, char *av0);
 
 /* token.c */
 int cmd_count(char *line, char *delimiter);
-char **cmd_tokens(char *line, char *delimiter)
+char **cmd_tokens(char *line, char *delimiter);
+
+/* find_path.c */
+char *find_path(char *cmd);
+
 
 #endif /* SHELL_H */
