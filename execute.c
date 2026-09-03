@@ -20,19 +20,26 @@ void execute_command(char *line, char *av0)
 		return;
 	}
 
-	
-	path = find_path(argv[0]);
-	if (path == NULL)
+	/* if argv[0] is 'exit', exit shell */
+	if (strcmp(argv[0], "exit") == 0)
 	{
-		fprintf(stderr, "%s: 1: %s: not found\n", av0, argv[0]);
 		free(argv);
-		return;
+		free(line);
+		exit(EXIT_SUCCESS);
 	}
 
 	/* if argv[0] is 'env', skip the rest of the function */
 	if (strcmp(argv[0], "env") == 0)
 	{
 		print_env();
+		free(argv);
+		return;
+	}
+
+	path = find_path(argv[0]);
+	if (path == NULL)
+	{
+		printf("Command not found\n");
 		free(argv);
 		return;
 	}
@@ -48,7 +55,7 @@ void execute_command(char *line, char *av0)
 	}
 	if (pid == 0)
 	{
-		execve(line, argv, environ);
+		execve(path, argv, environ);
 		perror(av0);
 		_exit(127);
 	}
