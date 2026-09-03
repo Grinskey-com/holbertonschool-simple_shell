@@ -30,7 +30,7 @@ char *find_path(char *cmd)
 	}
 
 	/* get path from get env */
-	path_env = _getenv("PATH");
+	path_env = getenv("PATH");
 	if (path_env == NULL || path_env[0] == '\0')
 		return (NULL);
 
@@ -43,7 +43,7 @@ char *find_path(char *cmd)
 	dir = strtok(path_copy, ":");
 	while (dir != NULL)
 	{
-		//build candidate path: dir + '/' + cmd 
+		/* build candidate path: dir + '/' + cmd */ 
 		len = strlen(dir) + strlen(cmd) + 2;
 		candidate = malloc(len);
 		if (candidate == NULL)
