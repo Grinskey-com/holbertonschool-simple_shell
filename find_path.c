@@ -31,7 +31,9 @@ char *find_path(char *cmd)
 
 	/* get path from get env */
 	path_env = _getenv("PATH");
-	if (path_env == NULL || path_env[0] == '\0')
+	if (path_env == NULL)
+		path_env = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
+	if (path_env[0] == '\0')
 		return (NULL);
 
 	/* duplicate path */

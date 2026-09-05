@@ -27,3 +27,6 @@ char *_getenv(const char *name)
 	}
 	return (NULL);
 }
+
+//void _exit()
+
