@@ -7,6 +7,9 @@ void print_env(void)
 {
 	int i;
 
+	if (environ == NULL)
+		return;
+
 	i = 0;
 	while (environ[i] != NULL)
 	{
