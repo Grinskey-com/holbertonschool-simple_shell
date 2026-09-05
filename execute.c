@@ -19,18 +19,10 @@ void execute_command(char *line, char *av0)
 		free(argv);
 		return;
 	}
-	/* if argv[0] is 'exit', exit shell */
-	if (strcmp(argv[0], "exit") == 0)
-	{
-		free(argv);
-		free(line);
-		exit(EXIT_SUCCESS);
-	}
 
-	/* if argv[0] is 'env', skip the rest of the function */
-	if (strcmp(argv[0], "env") == 0)
+	/* dispatch to a builtin (env, exit, ...) if argv[0] matches one */
+	if (handle_builtin(argv, line))
 	{
-		print_env();
 		free(argv);
 		return;
 	}
@@ -38,7 +30,8 @@ void execute_command(char *line, char *av0)
 	path = find_path(argv[0]);
 	if (path == NULL)
 	{
-		printf("Command not found\n");
+		fprintf(stderr, "%s: 1: %s: not found\n", av0, argv[0]);
+		g_status = 127;
 		free(argv);
 		return;
 	}
@@ -61,6 +54,10 @@ void execute_command(char *line, char *av0)
 	else
 	{
 		wait(&status);
+		if (WIFEXITED(status))
+			g_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			g_status = 128 + WTERMSIG(status);
 		free(path);
 		free(argv);
 	}

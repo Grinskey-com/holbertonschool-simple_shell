@@ -10,6 +10,8 @@
 
 extern char **environ;
 
+extern int g_status;
+
 /* input.c */
 char *read_line(void);
 void strip_line(char *line);
@@ -21,9 +23,14 @@ void execute_command(char *line, char *av0);
 int cmd_count(char *line, char *delimiter);
 char **cmd_tokens(char *line, char *delimiter);
 
+/* global: exit status of the last command that ran (0 at startup) */
+extern int g_status;
+
 /* builtins.c */
 void print_env(void);
 char *_getenv(const char *name);
+int builtin_exit(char **argv, char *line);
+int handle_builtin(char **argv, char *line);
 
 /* find_path.c */
 char *find_path(char *cmd);

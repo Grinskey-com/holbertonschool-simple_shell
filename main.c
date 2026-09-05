@@ -7,11 +7,14 @@
  *
  * Return: Always 0.
  */
+int g_status = 0;
+
 int main(int ac, char **av)
 {
 	char *line;
 
 	(void)ac;
+	
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -33,5 +36,5 @@ int main(int ac, char **av)
 		free(line);
 	}
 
-	return (0);
+	return (g_status);
 }
